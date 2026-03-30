@@ -98,11 +98,11 @@
 
 ---
 
-## Code Examples (Java — With Explanation)
+## Code Examples
 
-### Bad (Hard to Read)
+### Bad
 
-```java
+```
 public boolean f(int x) {
     if (x == 1) {
         return true;
@@ -123,7 +123,7 @@ public boolean f(int x) {
 
 ### Good (Expressive)
 
-```java
+```
 public boolean isActive(int userStatus) {
     return userStatus == ACTIVE;
 }
@@ -172,3 +172,271 @@ public boolean isActive(int userStatus) {
 - Treat code quality as a long-term investment
     
 - Write code as if someone else will maintain it (because they will)
+
+
+---
+
+
+# Chapter 2: Meaningful Names
+
+## Core Idea
+
+* Names are the primary way developers understand code.
+* Good naming reduces cognitive load and eliminates the need for comments.
+* Poor naming leads to confusion, misinterpretation, and bugs.
+
+---
+
+## Memorable Insights
+
+* **"Name a variable/method/class/file as if you are naming your baby"**
+
+  * Meaning: Names live long and should be chosen carefully
+  * Why it matters: Poor names persist and create long-term confusion
+
+* **"We are programmers, not computers"**
+
+  * Meaning: Code should be readable by humans, not just executable by machines
+  * Why it matters: Compiler-friendly but unreadable code becomes unmaintainable
+
+* **"The problem isn’t that we don’t understand code — it’s that we write code others can’t understand"**
+
+  * Meaning: Most issues arise from poor communication in code
+  * Why it matters: Bad naming increases WTFs/minute and slows teams
+
+---
+
+## Key Rules / Principles
+
+* Use intention-revealing names
+
+  * Names should clearly describe purpose and behavior
+  * ❌ Problem if not followed: Readers must infer meaning → increases cognitive load and bugs
+
+    ````
+    // Bad
+    int d;
+
+    // Good
+    int daysSinceCreation;
+    ````
+
+---
+
+* Use searchable names
+
+  * Names should be easy to find in the codebase
+  * ❌ Problem if not followed: Debugging and navigation become slow and inefficient
+
+    ````
+    // Bad
+    int e = 5;
+
+    // Good
+    int maxRetryCount = 5;
+    ````
+
+---
+
+* Avoid disinformation
+
+  * Names must accurately reflect the data or behavior
+  * ❌ Problem if not followed: Misleading names cause incorrect assumptions and bugs
+
+    ````
+    // Bad
+    List<User> userSet;
+
+    // Good
+    List<User> users;
+    ````
+
+---
+
+* Make meaningful distinctions
+
+  * Avoid names that differ only by numbers or vague suffixes
+  * ❌ Problem if not followed: Developers must inspect implementation to understand differences
+
+    ````
+    // Bad
+    Product product;
+    Product productData;
+    Product productInfo;
+
+    // Good
+    Product product;
+    Product cachedProduct;
+    Product persistedProduct;
+    ````
+
+---
+
+* Use pronounceable names
+
+  * Names should be easy to read and speak
+  * ❌ Problem if not followed: Hard to communicate during discussions and code reviews
+
+    ````
+    // Bad
+    String genymdhms;
+
+    // Good
+    String generationTimestamp;
+    ````
+
+---
+
+* Use nouns for classes, verbs for methods
+
+  * Classes represent entities, methods represent actions
+  * ❌ Problem if not followed: Confuses usage and responsibility
+
+    ````
+    // Bad
+    class SaveUser { }
+
+    // Good
+    class UserService {
+        void saveUser(User user) { }
+    }
+    ````
+
+---
+
+* Avoid encoding (Hungarian notation, prefixes)
+
+  * Do not include type or scope in names
+  * ❌ Problem if not followed: Adds noise and becomes outdated
+
+    ````
+    // Bad
+    String strName;
+
+    // Good
+    String name;
+    ````
+
+---
+
+* Avoid mental mapping
+
+  * Names should not require translation in the reader’s mind
+  * ❌ Problem if not followed: Slows reading and increases errors
+
+    ````
+    // Bad
+    int d; // elapsed time in days
+
+    // Good
+    int elapsedTimeInDays;
+    ````
+
+---
+
+* Use solution domain names
+
+  * Use standard computer science terms when appropriate
+  * ❌ Problem if not followed: Reinventing names confuses experienced developers
+
+    ````
+    // Good
+    Stack<Integer> stack;
+    Queue<User> userQueue;
+    ````
+
+---
+
+* Use problem domain names
+
+  * Reflect real-world business concepts
+  * ❌ Problem if not followed: Code becomes disconnected from business logic
+
+    ````
+    // Good
+    class Invoice;
+    class Customer;
+    ````
+
+---
+
+* Add meaningful context
+
+  * Provide enough context for clarity
+  * ❌ Problem if not followed: Names become ambiguous
+
+    ````
+    // Bad
+    String name;
+
+    // Good
+    String customerName;
+    ````
+
+---
+
+* Don’t add unnecessary context
+
+  * Avoid redundant or repetitive prefixes
+  * ❌ Problem if not followed: Adds noise and reduces readability
+
+    ````
+    // Bad
+    class UserData {
+        String userName;
+    }
+
+    // Good
+    class User {
+        String name;
+    }
+    ````
+
+---
+
+## Important Concepts
+
+* Intention-Revealing Names
+
+  * Clearly express what the code does
+  * Reduces need for comments
+
+* Searchability
+
+  * Names should be easy to locate in large codebases
+  * Improves debugging and navigation
+
+* Distinction vs Noise
+
+  * Names should differ meaningfully, not superficially
+
+* Context Clarity
+
+  * Names should make sense within their scope
+
+---
+
+## Common Mistakes / Code Smells
+
+* Single-letter variables outside small scopes
+  → Hard to search and understand → Use descriptive names
+
+* Misleading names
+  → Causes incorrect assumptions → Use accurate naming
+
+* Overuse of generic terms (`data`, `manager`)
+  → Reduces clarity → Use domain-specific names
+
+* Similar names with no clear distinction
+  → Forces deep reading → Use meaningful differences
+
+---
+
+## Practical Takeaways
+
+* Always use names that reveal intent
+* Optimize for readability and searchability
+* Avoid misleading or vague names
+* Reduce cognitive load — no mental mapping
+* Align names with domain and responsibility
+* Rename aggressively during refactoring
